@@ -1,4 +1,5 @@
 import 'package:engage_infinity_box/screens/screen_cart.dart';
+import 'package:engage_infinity_box/widgets/widget_search.dart';
 import 'package:flutter/material.dart';
 import '../widgets/widget_product_grid.dart';
 
@@ -15,9 +16,12 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
+  bool searchToggle = false;
+
   @override
   void initState() {
     super.initState();
+    searchToggle = false;
     _controller = AnimationController(vsync: this);
   }
 
@@ -31,14 +35,30 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Screen'),
+        title: searchToggle == true ?  const SearchWidget():
+        const Text('Home Screen'),
         titleTextStyle: Theme.of(context).textTheme.titleMedium,
         actions: [
-          IconButton(onPressed: () {
-            Navigator.of(context).pushNamed(
-              CartScreen.routeName,
-            );
-          }, icon: Icon(Icons.shopping_cart_sharp))
+          if (searchToggle == false) IconButton(
+            onPressed: () {
+              setState(() {
+                searchToggle =true;
+              });
+            },
+            icon: const Icon(
+              Icons.search_sharp,
+            ),
+          )  ,
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(
+                CartScreen.routeName,
+              );
+            },
+            icon: const Icon(
+              Icons.shopping_cart_sharp,
+            ),
+          ),
         ],
       ),
       body: AnimatedContainer(
@@ -51,7 +71,9 @@ class _HomeScreenState extends State<HomeScreen>
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(30),
           border: Border.all(
-              color: Theme.of(context).colorScheme.secondary, width: 1,),
+            color: Theme.of(context).colorScheme.secondary,
+            width: 1,
+          ),
         ),
         child: const ProductGridWidget(),
       ),
