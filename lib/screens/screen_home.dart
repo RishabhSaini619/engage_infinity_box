@@ -1,3 +1,4 @@
+import 'package:engage_infinity_box/screens/screen_cart.dart';
 import 'package:flutter/material.dart';
 import '../widgets/widget_product_grid.dart';
 
@@ -32,6 +33,13 @@ class _HomeScreenState extends State<HomeScreen>
       appBar: AppBar(
         title: const Text('Home Screen'),
         titleTextStyle: Theme.of(context).textTheme.titleMedium,
+        actions: [
+          IconButton(onPressed: () {
+            Navigator.of(context).pushNamed(
+              CartScreen.routeName,
+            );
+          }, icon: Icon(Icons.shopping_cart_sharp))
+        ],
       ),
       body: AnimatedContainer(
         alignment: Alignment.center,

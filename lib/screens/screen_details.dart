@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../model/basicProductData.dart';
+import 'screen_cart.dart';
 
 class DetailScreen extends StatefulWidget {
   static const routeName = '/DetailScreen';
@@ -57,6 +58,13 @@ class _DetailScreenState extends State<DetailScreen>
       appBar: AppBar(
         title: const Text('Detail Screen'),
         titleTextStyle: Theme.of(context).textTheme.titleMedium,
+        actions: [
+          IconButton(onPressed: () {
+            Navigator.of(context).pushNamed(
+              CartScreen.routeName,
+            );
+          }, icon: Icon(Icons.shopping_cart_sharp,),),
+        ],
       ),
       body: buildContainer(
         context,
