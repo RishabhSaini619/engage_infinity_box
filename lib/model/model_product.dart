@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProductModel{
-   int productId;
+   double productId;
    String productTitle;
    String productDescription;
    List<String> productCategories;
