@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../model/basicProductData.dart';
 
 class DetailScreen extends StatefulWidget {
+  static const routeName = '/DetailScreen';
+
   const DetailScreen({Key? key}) : super(key: key);
 
   @override
@@ -25,6 +27,30 @@ class _DetailScreenState extends State<DetailScreen>
     super.dispose();
   }
 
+  Widget buildContainer(BuildContext context, String title, Widget body) {
+    return AnimatedContainer(
+      alignment: Alignment.center,
+      duration: const Duration(seconds: 5),
+      curve: Curves.elasticOut,
+      margin: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(
+            color: Theme.of(context).colorScheme.secondary, width: 1),
+      ),
+      child: Column(
+        children: [
+          Text(
+            title,
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+          body,
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,87 +58,67 @@ class _DetailScreenState extends State<DetailScreen>
         title: const Text('Detail Screen'),
         titleTextStyle: Theme.of(context).textTheme.titleMedium,
       ),
-      body: AnimatedContainer(
-        alignment: Alignment.center,
-        duration: const Duration(seconds: 5),
-        curve: Curves.elasticOut,
-        margin: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          shape: BoxShape.rectangle,
-          borderRadius: BorderRadius.circular(30),
-          border: Border.all(
-              color: Theme.of(context).colorScheme.secondary, width: 1),
-        ),
-        child: AnimatedContainer(
-          alignment: Alignment.center,
-          duration: const Duration(seconds: 5),
-          curve: Curves.elasticOut,
-          margin: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(30),
-            border: Border.all(
-                color: Theme.of(context).colorScheme.secondary, width: 1),
-          ),
-          child: GridView(
-            padding: const EdgeInsets.all(20),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20,
-              childAspectRatio: 3 / 2,
-            ),
-            children: basicProductData
-                .map((productData) => AnimatedContainer(
-                      alignment: Alignment.center,
-                      duration: const Duration(seconds: 5),
-                      curve: Curves.elasticOut,
-                      margin: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(30),
-                        border: Border.all(
-                            color: Theme.of(context).colorScheme.secondary,
-                            width: 1),
-                      ),
-                      child: InkWell(
-                        onTap: () {},
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(30),
-                          child: GridTile(
-                            header: Text(productData.productId.toString()),
-                            footer: GridTileBar(
-                              backgroundColor: Colors.black12,
-                              title: Text(
-                                productData.productTitle,
-                                maxLines: 2,
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.bodyLarge,
-                              ),
-                            ),
-                            child: GestureDetector(
-                              onTap: () {
-                                // Navigator.of(context).pushNamed(
-                                //   DetailScreen.routeName,
-                                //   arguments: ProductModel.productId,
-                                // );
-                              },
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Hero(
-                                  tag: productData.productId,
-                                  child: Image.network(
-                                    productData.productImageURL,
-                                    fit: BoxFit.contain,
-                                  ),
+      body: buildContainer(
+        context,
+        "",
+        SingleChildScrollView(
+          child: Stack(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  buildContainer(
+                    context,
+                    "",
+                    Text('image'),
+                  ),
+
+                    Row(
+                        mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                      children: [
+
+                          Column(
+                              children: [
+                                buildContainer(
+                                  context,
+                                  "",
+                                  Text('title'),
                                 ),
-                              ),
-                            ),
-                          ),
-                        ),
+                                buildContainer(
+                                  context,
+                                  "",
+                                  Text('rating'),
+                                ),
+                              ]),
+
+                      buildContainer(
+                        context,
+                        "",
+                        Text('price'),
                       ),
-                    ))
-                .toList(),
+                    ]),
+
+                  buildContainer(
+                    context,
+                    "",
+                    Text('cati'),
+                  ),
+                  buildContainer(
+                    context,
+                    "",
+                    Text('desp'),
+                  ),
+                ],
+              ),
+              Positioned(
+                bottom: 10,
+                right: 10,
+                child: FloatingActionButton(
+                  onPressed: () {},
+                  child: Icon(Icons.add_shopping_cart_sharp),
+                ),
+              ),
+            ],
           ),
         ),
       ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatefulWidget {
+  static const routeName = '/CartScreen';
+
   const CartScreen({Key? key}) : super(key: key);
 
   @override

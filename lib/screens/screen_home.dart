@@ -1,9 +1,11 @@
-import 'package:engage_infinity_box/model/basicProductData.dart';
 import 'package:flutter/material.dart';
-
 import '../widgets/widget_product_grid.dart';
 
 class HomeScreen extends StatefulWidget {
+  static const routeName = '/HomeScreen';
+
+  const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }

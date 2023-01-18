@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'screens/screen_cart.dart';
+import 'screens/screen_details.dart';
 import 'screens/screen_home.dart';
 
 void main() {
@@ -91,7 +93,12 @@ class MyApp extends StatelessWidget {
           systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
       ),
-      home: HomeScreen(),
+      home: const HomeScreen(),
+      routes: {
+        HomeScreen.routeName: (ctx) => const HomeScreen(),
+        DetailScreen.routeName: (ctx) => const DetailScreen(),
+        CartScreen.routeName: (ctx) => const CartScreen(),
+      },
     );
   }
 }

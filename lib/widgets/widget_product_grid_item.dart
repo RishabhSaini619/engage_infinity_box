@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/screen_details.dart';
+
 class ProductGridItemWidget extends StatelessWidget {
   final String productItemId;
   final String productItemTitle;
@@ -15,7 +17,12 @@ class ProductGridItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          DetailScreen.routeName,
+          arguments: productItemId,
+        );
+      },
       child: AnimatedContainer(
         alignment: Alignment.center,
         duration: const Duration(seconds: 5),
